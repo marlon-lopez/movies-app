@@ -2,8 +2,8 @@ import React from 'react';
 
 const SearchBar: React.FC = () => {
   return (
-    <div className='w-full flex items-center px-5 py-3 justify-center bg-primary-blue'>
-      <div className='flex justify-center w-full'>
+    <div className='w-full flex items-center px-5 py-3 mb-6 mt-2 justify-center bg-primary-blue md:mb-0'>
+      <div className='flex justify-center w-full md:w-96'>
         <input
           type='text'
           placeholder='Search'
