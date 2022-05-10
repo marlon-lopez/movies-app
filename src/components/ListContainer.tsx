@@ -9,16 +9,15 @@ const ListContainer: React.FC<Props> = ({ title, children, search }) => {
   return (
     <div className='w-full flex flex-col px-0.5 py-5 my-4 md:my-2'>
       <div className='flex justify-between'>
-        <h3 className='text-white font-semibold mb-4 mx-2 capitalize'>
+        <h3 className='text-white font-semibold mb-4 mx-2 capitalize md:mx-5'>
           {title}
         </h3>
         <Link
           to={{
-            pathname: `movies`,
-            search,
+            pathname: `movies/${search}`,
           }}
           className='text-white font-semibold mb-4 mx-2 '>
-          <div className='flex items-center text-blue-400'>
+          <div className='flex items-center text-blue-400 '>
             <p className='text-xs'>See All</p>
             <svg
               xmlns='http://www.w3.org/2000/svg'

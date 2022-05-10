@@ -1,60 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ListContainer from './ListContainer';
-import Movie from './Movie';
+import useGetMoviesByCategory from '../hooks/useGetMoviesByCategory';
+import { MoviesCategoryKey, Movie } from '../utils/types';
 
-const Banner: React.FC = () => {
-  return (
-    <ListContainer title='Upcoming movies' search='upcoming'>
-      <Movie
-        //cardWidth='min-w-full'
-        cardWidth='min-w-full md:w-max'
-        cardHeight='h-52 md:h-auto'
-        //cardHeight='h-64'
-        img={'https://image.tmdb.org/t/p/w500/8s4h9friP6Ci3adRGahHARVd76E.jpg'}
-        date='Des 16,2020'
-        title='Space-Jam'
-      />
-      <Movie
-        cardWidth='min-w-full md:w-max'
-        cardHeight='h-52 md:h-auto'
-        img={'https://image.tmdb.org/t/p/w500/8s4h9friP6Ci3adRGahHARVd76E.jpg'}
-        date='Des 16,2020'
-        title='Space-Jam'
-      />
-      <Movie
-        //cardWidth='min-w-full'
-        cardWidth='min-w-full md:w-max'
-        cardHeight='h-52 md:h-auto'
-        //cardHeight='h-64'
-        img={'https://image.tmdb.org/t/p/w500/8s4h9friP6Ci3adRGahHARVd76E.jpg'}
-        date='Des 16,2020'
-        title='Space-Jam'
-      />
-      <Movie
-        cardWidth='min-w-full md:w-max'
-        cardHeight='h-52 md:h-auto'
-        img={'https://image.tmdb.org/t/p/w500/8s4h9friP6Ci3adRGahHARVd76E.jpg'}
-        date='Des 16,2020'
-        title='Space-Jam'
-      />
-      <Movie
-        //cardWidth='min-w-full'
-        cardWidth='min-w-full md:w-max'
-        cardHeight='h-52 md:h-auto'
-        //cardHeight='h-64'
-        img={'https://image.tmdb.org/t/p/w500/8s4h9friP6Ci3adRGahHARVd76E.jpg'}
-        date='Des 16,2020'
-        title='Space-Jam'
-      />
-      <Movie
-        cardWidth='min-w-full md:w-max'
-        cardHeight='h-52 md:h-auto'
-        img={'https://image.tmdb.org/t/p/w500/8s4h9friP6Ci3adRGahHARVd76E.jpg'}
-        date='Des 16,2020'
-        title='Space-Jam'
-      />
-    </ListContainer>
-  );
+const Banner: React.FC<{ category: MoviesCategoryKey }> = ({ category }) => {
+  const { data, isLoading, isSuccess } = useGetMoviesByCategory(category, 1);
+  console.log('banner rendered');
+  if (isLoading)
+    return (
+      <h1 className='text-white font-medium text-base '>Cargando........</h1>
+    );
+  if (isSuccess)
+    return (
+      <ListContainer title='Upcoming movies' search='upcoming'>
+        {data.map((movie) => (
+          <div
+            className='flex-shrink-0 mx-2 overflow-hidden bg-primary-blue-blue md:mx-5'
+            key={movie.id}>
+            <div className='w-96 bg-secondary-blue xl:min-w-max'>
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+                alt={movie.title}
+              />
+            </div>
+            <div>
+              <h4 className='text-white font-medium text-base '>
+                {movie.title}
+              </h4>
+              <p className='text-gray-500 text-xs '>{movie.release_date}</p>
+            </div>
+          </div>
+        ))}
+      </ListContainer>
+    );
+  return null;
 };
 
 export default Banner;
