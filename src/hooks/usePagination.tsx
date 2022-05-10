@@ -1,15 +1,26 @@
 import { retry } from '@reduxjs/toolkit/dist/query';
 import { arch } from 'os';
 import React, { useEffect, useState } from 'react';
-import { useAppSelector } from '../features/store';
+import { RootState, useAppSelector } from '../features/store';
 
-const usePagination = (data: string, shownPageNumber: number = 7) => {
+const usePagination = <
+  K1 extends keyof RootState,
+  K2 extends keyof RootState[K1],
+  K3 extends keyof RootState[K1][K2],
+>(
+  entry: K1,
+  data: K2,
+  shownPageNumber: number = 7,
+) => {
   console.log('usePagination');
   const [currentPage, setCurrentPage] = useState(1);
 
-  let { totalPages } = useAppSelector(({ movies }) => movies[data]);
-  totalPages = totalPages > 50 ? 50 : totalPages;
+  const resultState = useAppSelector((state) => state[entry][data]);
+  const str = 'totalPages' as K3;
+  let totalPages =
+    typeof resultState[str] === 'number' ? Number(resultState[str]) : 0;
 
+  totalPages = totalPages >= 500 ? 500 : totalPages;
   let pageNumbers: (number | string)[] = [];
 
   //pageNumbers equal to the total pages
@@ -69,6 +80,8 @@ const usePagination = (data: string, shownPageNumber: number = 7) => {
   };
 
   useEffect(() => {}, [currentPage, shownPageNumber]);
+
+  console.log(totalPages);
 
   //returns
   //a function called goTo() => will set the state to n page
