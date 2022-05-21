@@ -16,12 +16,12 @@ const App: React.FC = () => {
         <div className='w-full  flex flex-col overflow-auto bg-primary-blue'>
           <SearchBar />
           <Route path='/' exact component={Home} />
-          <Route path='/movies/:id' exact component={Details} />
-          <Route path='/movies' component={Movies} exact />
-          <Route path='/movies/:category' component={Movies} exact />
+          <Route path='/movie/:id' exact component={Details} />
+          <Route path='/movie' component={Movies} exact />
+          <Route path='/movies/category/:category' component={Movies} exact />
           <Route path='/tv' component={TvShows} exact />
-          <Route path='/tv/:category' component={TvShows} exact />
           <Route path='/tv/:id' component={Details} exact />
+          <Route path='/tv/category/:category' component={TvShows} exact />
         </div>
       </main>
     </Router>

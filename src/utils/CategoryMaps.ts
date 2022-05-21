@@ -10,7 +10,6 @@ moviesCategoriesMap.set('top_rated', 'top_rated');
 
 const tvShowsCategoriesMap: Map<string, TvShowsCategoryKey> = new Map();
 tvShowsCategoriesMap.set('popular', 'popular');
-tvShowsCategoriesMap.set('latest', 'latest');
 tvShowsCategoriesMap.set('top_rated', 'top_rated');
 tvShowsCategoriesMap.set('on_the_air', 'on_the_air');
 
