@@ -23,16 +23,18 @@ const Pagination: React.FC<Props> = ({ page }) => {
             {'<'}
           </button>
         )}
-        {page.pageNumbers.map((num) => (
-          <button
-            key={num}
-            className={`border-none outline-none bg-transparent  ${
-              num === page.currentPage ? 'text-white' : 'text-gray-500'
-            }  text-lg hover:text-white `}
-            onClick={() => page.goTo(Number(num))}>
-            {num}
-          </button>
-        ))}
+        {page.pageNumbers.map((num) => {
+          return (
+            <button
+              key={num !== '...' ? num : Math.random()}
+              className={`border-none outline-none bg-transparent  ${
+                num === page.currentPage ? 'text-white' : 'text-gray-500'
+              }  text-lg hover:text-white `}
+              onClick={() => page.goTo(Number(num))}>
+              {num}
+            </button>
+          );
+        })}
         {!page.isLast && (
           <button
             className='border-none outline-none bg-transparent text-gray-500 text-lg hover:text-white '
