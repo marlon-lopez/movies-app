@@ -11,6 +11,8 @@ const TvList: React.FC<{ items: TvShow[] }> = ({ items }) => {
           key={item.id}
           date={item.first_air_date}
           title={item.original_name}
+          id={item.id}
+          type={'tv'}
         />
       ))}
     </div>

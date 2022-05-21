@@ -11,6 +11,8 @@ const MovieList: React.FC<{ items: Movie[] }> = ({ items }) => {
           key={item.id}
           date={item.release_date}
           title={item.title}
+          id={item.id}
+          type={'movie'}
         />
       ))}
     </div>

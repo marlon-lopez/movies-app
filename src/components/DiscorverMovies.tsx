@@ -28,6 +28,8 @@ const DiscoverMovies: React.FC<Props> = ({ title, category }) => {
             key={movie.id}
             date={movie.release_date}
             title={movie.title}
+            id={movie.id}
+            type={'movie'}
           />
         ))}
       </ListContainer>
