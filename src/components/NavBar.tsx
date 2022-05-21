@@ -13,7 +13,7 @@ const LINKS = [
     icon: <HomeIcon className='h-6 w-7' />,
   },
   {
-    path: '/movies',
+    path: '/movie',
     name: 'Movies',
     icon: <CollectionIcon className='h-6 w-6' />,
   },
