@@ -1,17 +1,18 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { fetchTvShowsByCategory } from '../utils/API';
+import { fetchTvShowsByCategory, getGenres } from '../utils/API';
 import {
   Category,
   TvShowsQueryResponse,
   TvShow,
   TvShowsCategoryKey,
+  GenreId,
 } from '../utils/types';
 
 export interface TvShowSliceState {
   popular: Category<TvShow>;
   top_rated: Category<TvShow>;
-  latest: Category<TvShow>;
   on_the_air: Category<TvShow>;
+  genres: GenreId[];
 }
 
 export const InitialCategoryState: Category<TvShow> = {
@@ -25,8 +26,8 @@ export const InitialCategoryState: Category<TvShow> = {
 const initialState: TvShowSliceState = {
   popular: InitialCategoryState,
   top_rated: InitialCategoryState,
-  latest: InitialCategoryState,
   on_the_air: InitialCategoryState,
+  genres: [],
 };
 
 export const fetchTvShows = createAsyncThunk(
@@ -48,6 +49,16 @@ export const fetchTvShows = createAsyncThunk(
     } catch (error) {
       return thunkApi.rejectWithValue('Request has been rejected');
     }
+  },
+);
+
+export const fetchTvShowsGenres = createAsyncThunk(
+  'tvShows/fetchGenreList',
+  async (thunkApi) => {
+    try {
+      const response = await getGenres('tv');
+      return response.genres;
+    } catch (error) {}
   },
 );
 
@@ -78,10 +89,14 @@ const tvShowSlice = createSlice({
       )
       .addCase(fetchTvShows.rejected, (state, action) => {
         state[action.meta.arg.category].loading = 'failed';
+      })
+      .addCase(fetchTvShowsGenres.pending, (state, actio) => {})
+      .addCase(fetchTvShowsGenres.fulfilled, (state, action) => {
+        state.genres = action.payload;
       });
   },
 });
 
-export const {} = tvShowSlice.actions;
+//export const {} = tvShowSlice.actions;
 
 export default tvShowSlice.reducer;

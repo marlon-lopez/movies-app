@@ -1,5 +1,11 @@
 import axios, { Method, AxiosError } from 'axios';
-import { MoviesQueryResponse } from './types';
+import {
+  Movie,
+  MovieDetails,
+  MoviesQueryResponse,
+  TvShow,
+  TvShowDetails,
+} from './types';
 
 const createRequest = async (url: string, method: Method) => {
   try {
@@ -34,14 +40,30 @@ export const fetchGenreList = () => {
   return createRequest(`/genre/movie/list`, 'GET');
 };
 
-export const fetchMovieDetails = (id: number) => {
-  return createRequest(`movie/${id}`, 'GET');
+//type would be movie or tv
+export const getDetails = (
+  type: string,
+  id: number,
+): Promise<MovieDetails | TvShowDetails> => {
+  return createRequest(`${type}/${id}?&append_to_response=videos`, 'GET');
 };
 
-export const fetchTvShowDetails = (id: number) => {
-  return createRequest(`tv/${id}`, 'GET');
+export const getCredits = (type: string, id: number) => {
+  return createRequest(`${type}/${id}/credits`, 'GET');
 };
 
-export const fetchTvShowVideo = (id: number) => {
-  return createRequest(`tv/${id}/videos`, 'GET');
+export const getRecomendations = (
+  type: string,
+  id: number,
+): Promise<{
+  page: number;
+  results: Movie[] | TvShow[];
+  total_pages: number;
+  total_results: number;
+}> => {
+  return createRequest(`${type}/${id}/recommendations?limit=10`, 'GET');
+};
+
+export const getGenres = (type: string) => {
+  return createRequest(`genre/${type}/list`, 'GET');
 };

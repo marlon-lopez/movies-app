@@ -57,6 +57,36 @@ interface ProductionCountries {
   iso_3166_1: string;
   name: string;
 }
+interface Video {
+  id: string;
+  iso_3166_1: string;
+  iso_639_1: string;
+  key: string;
+  name: string;
+  official: boolean;
+  published_at: string;
+  site: string;
+  size: number;
+  type: string;
+}
+export interface Videos {
+  results: Video[];
+}
+
+export interface Cast {
+  adult: boolean;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  order: number;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+}
 
 export interface MovieDetails {
   adult: boolean;
@@ -82,6 +112,9 @@ export interface MovieDetails {
   tagline: string;
   title: string;
   video: boolean;
+  videos: Videos;
+  cast: Cast[];
+  recomendations: Movie[];
   vote_average: number;
   vote_count: number;
 }
@@ -151,6 +184,9 @@ export interface TvShowDetails {
   spoken_languages: SpokenLanguages[];
   status: string;
   tagline: string;
+  cast: Cast[];
+  recomendations: TvShow[];
+  videos: Videos;
   type: string;
   vote_average: number;
   vote_count: number;
@@ -191,5 +227,6 @@ export type Category<List> = {
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 };
 
-export type MoviesCategoryKey = keyof MoviesSliceState;
-export type TvShowsCategoryKey = keyof TvShowSliceState;
+export type MoviesCategoryKey = Exclude<keyof MoviesSliceState, 'genres'>;
+export type TvShowsCategoryKey = Exclude<keyof TvShowSliceState, 'genres'>;
+export type RootStateEntries = keyof RootState;

@@ -1,6 +1,4 @@
-import { retry } from '@reduxjs/toolkit/dist/query';
-import { arch } from 'os';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RootState, useAppSelector } from '../features/store';
 
 const usePagination = <
@@ -12,7 +10,6 @@ const usePagination = <
   data: K2,
   shownPageNumber: number = 7,
 ) => {
-  console.log('usePagination');
   const [currentPage, setCurrentPage] = useState(1);
 
   const resultState = useAppSelector((state) => state[entry][data]);
@@ -80,8 +77,6 @@ const usePagination = <
   };
 
   useEffect(() => {}, [currentPage, shownPageNumber]);
-
-  console.log(totalPages);
 
   //returns
   //a function called goTo() => will set the state to n page
