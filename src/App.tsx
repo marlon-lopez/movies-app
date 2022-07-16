@@ -11,6 +11,7 @@ import Search from './pages/Search';
 import Discover from './pages/Discover';
 import { useAppDispatch } from './features/store';
 import { fetchGenres } from './features/discoverSlice';
+import Favorites from './pages/Favorites';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -33,6 +34,7 @@ const App: React.FC = () => {
           <Route path='/search/:query' component={Search} exact />
           <Route path='/tv/discover/:genreId' component={Discover} exact />
           <Route path='/movie/discover/:genreId' component={Discover} exact />
+          <Route path='/favorites' component={Favorites} exact />
         </div>
       </main>
     </Router>

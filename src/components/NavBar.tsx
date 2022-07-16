@@ -1,5 +1,10 @@
 import React from 'react';
-import { HomeIcon, CollectionIcon, FilmIcon } from '@heroicons/react/outline';
+import {
+  HomeIcon,
+  CollectionIcon,
+  FilmIcon,
+  HeartIcon,
+} from '@heroicons/react/outline';
 import { Link } from 'react-router-dom';
 const LINKS = [
   {
@@ -16,6 +21,11 @@ const LINKS = [
     path: '/tv',
     name: 'Series',
     icon: <FilmIcon className='h-6 w-6' />,
+  },
+  {
+    path: '/favorites',
+    name: 'Favorites',
+    icon: <HeartIcon className='h-6 w-6' />,
   },
 ];
 
