@@ -9,6 +9,7 @@ interface Props {
   genres: GenreId[];
   title: string;
   overview: string;
+  type: string;
 }
 
 const Overview: React.FC<Props> = ({
@@ -18,6 +19,7 @@ const Overview: React.FC<Props> = ({
   title,
   vote_average,
   overview,
+  type,
 }) => {
   return (
     <>
@@ -39,9 +41,9 @@ const Overview: React.FC<Props> = ({
         {/* description */}
         <div className='flex flex-col xl:flex-1  xl:px-12 xl:py-8 '>
           <div className='flex my-4 justify-center text-white xl:justify-start xl:order-2'>
-            <div className='flex flex-wrap gap-3'>
+            <div className='flex flex-wrap gap-3 justify-center'>
               <StarIcon className='h-6 w-6 ' /> {vote_average}
-              <GenreCards genres={genres} />
+              <GenreCards genres={genres} type={type} />
             </div>
           </div>
 

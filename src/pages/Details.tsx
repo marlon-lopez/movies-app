@@ -32,6 +32,7 @@ const Details: React.FC = () => {
           overview={selected.overview}
           title={'title' in selected ? selected.title : selected.name}
           vote_average={selected.vote_average}
+          type={type}
         />
         {/* Cast and Crew */}
         <ListContainer title={'Cast & Crew'} key='crew'>
