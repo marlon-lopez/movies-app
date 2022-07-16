@@ -39,6 +39,7 @@ export interface TvShow {
 export interface GenreId {
   id: number;
   name: string;
+  category?: boolean;
 }
 
 export interface ProductionCompany {

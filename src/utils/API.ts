@@ -1,11 +1,5 @@
 import axios, { Method, AxiosError } from 'axios';
-import {
-  Movie,
-  MovieDetails,
-  MoviesQueryResponse,
-  TvShow,
-  TvShowDetails,
-} from './types';
+import { Movie, MovieDetails, TvShow, TvShowDetails } from './types';
 
 const createRequest = async (url: string, method: Method) => {
   try {
@@ -66,4 +60,14 @@ export const getRecomendations = (
 
 export const getGenres = (type: string) => {
   return createRequest(`genre/${type}/list`, 'GET');
+};
+export const getQuery = (query: string, page: number) => {
+  return createRequest(`search/multi?query=${query}&page=${page}`, 'GET');
+};
+
+export const getDataByGenre = (type: string, genreId: number, page: number) => {
+  return createRequest(
+    `discover/${type}?with_genres=${genreId}&page=${page}`,
+    'GET',
+  );
 };
