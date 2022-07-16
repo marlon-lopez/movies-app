@@ -1,16 +1,13 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import useGetTvShowsByCategory from '../hooks/useGetTvShowsByCategory';
-import TvList from '../components/TvList';
-import SelectFilter from '../components/SelectFilter';
 import Pagination from '../components/Pagination';
 import usePagination from '../hooks/usePagination';
 import { tvShowsCategoriesMap } from '../utils/CategoryMaps';
 import GenreCards from '../components/GenreCards';
-import ListContainer from '../components/ListContainer';
+import Cards from '../components/Cards';
 
 const TvShows: React.FC = () => {
-  console.log('rendered');
   const { pathname } = useLocation();
   const category =
     tvShowsCategoriesMap.get(pathname.split('/')[3]) || 'popular';
@@ -23,9 +20,8 @@ const TvShows: React.FC = () => {
   if (isSuccess) {
     return (
       <div className='flex flex-col px-0 md:px-4'>
-        <SelectFilter />
-        <GenreCards genres={genres} />
-        <TvList items={data} />
+        <GenreCards genres={genres} type='tv' />
+        <Cards items={data} />
         <Pagination page={page} />
       </div>
     );

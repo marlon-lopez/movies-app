@@ -1,12 +1,12 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import SelectFilter from '../components/SelectFilter';
-import MovieList from '../components/MovieList';
 import useGetMoviesByCategory from '../hooks/useGetMoviesByCategory';
+
 import Pagination from '../components/Pagination';
 import usePagination from '../hooks/usePagination';
 import { moviesCategoriesMap } from '../utils/CategoryMaps';
 import GenreCards from '../components/GenreCards';
+import Cards from '../components/Cards';
 const Movies: React.FC = () => {
   const { pathname } = useLocation();
   //get popular category in case thre is no category in parameters
@@ -24,9 +24,8 @@ const Movies: React.FC = () => {
   if (isSuccess)
     return (
       <div className='flex flex-col px-0 md:px-4'>
-        <SelectFilter />
-        <GenreCards genres={genres} />
-        <MovieList items={data} />
+        <GenreCards genres={genres} type='movie' />
+        <Cards items={data} />
         <Pagination page={page} />
       </div>
     );
