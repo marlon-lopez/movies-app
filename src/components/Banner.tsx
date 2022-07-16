@@ -1,15 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ListContainer from './ListContainer';
 import useGetMoviesByCategory from '../hooks/useGetMoviesByCategory';
 import { MoviesCategoryKey } from '../utils/types';
 import { Link } from 'react-router-dom';
+import BanerSkeletonCard from './BanerSkeletonCard';
 
 const Banner: React.FC<{ category: MoviesCategoryKey }> = ({ category }) => {
   const { data, isLoading, isSuccess } = useGetMoviesByCategory(category, 1);
   console.log('banner rendered');
   if (isLoading)
     return (
-      <h1 className='text-white font-medium text-base '>Cargando........</h1>
+      <ListContainer title='Upcoming movies'>
+        <BanerSkeletonCard />
+        <BanerSkeletonCard />
+        <BanerSkeletonCard />
+        <BanerSkeletonCard />
+        <BanerSkeletonCard />
+        <BanerSkeletonCard />
+      </ListContainer>
     );
   if (isSuccess)
     return (

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 //Components
 import Banner from '../components/Banner';
-import DiscoverMovies from '../components/DiscorverMovies';
+import DiscoverMovies from '../components/DiscoverMovies';
 
 const Home: React.FC = () => {
   useEffect(() => {

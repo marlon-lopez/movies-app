@@ -2,13 +2,15 @@ import React from 'react';
 import ListContainer from './ListContainer';
 import CardItem from './CardItem';
 import useGetMoviesByCategory from '../hooks/useGetMoviesByCategory';
-import { MoviesCategoryKey, Movie } from '../utils/types';
+import { MoviesCategoryKey } from '../utils/types';
+import CardSkeleton from './CardSkeleton';
 
 interface Props {
   title: string;
   category: MoviesCategoryKey;
 }
 const DiscoverMovies: React.FC<Props> = ({ title, category }) => {
+  console.log('discover rendering');
   const { data, isLoading, isSuccess } = useGetMoviesByCategory(
     category,
 
@@ -16,7 +18,15 @@ const DiscoverMovies: React.FC<Props> = ({ title, category }) => {
   );
   if (isLoading)
     return (
-      <h1 className='text-white font-medium text-base '>Cargando........</h1>
+      <ListContainer title={title}>
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+      </ListContainer>
     );
 
   if (isSuccess)

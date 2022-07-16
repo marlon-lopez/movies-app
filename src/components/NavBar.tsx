@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  HomeIcon,
-  CollectionIcon,
-  FilmIcon,
-  UserCircleIcon,
-} from '@heroicons/react/outline';
+import { HomeIcon, CollectionIcon, FilmIcon } from '@heroicons/react/outline';
 import { Link } from 'react-router-dom';
 const LINKS = [
   {
@@ -21,11 +16,6 @@ const LINKS = [
     path: '/tv',
     name: 'Series',
     icon: <FilmIcon className='h-6 w-6' />,
-  },
-  {
-    path: '/me',
-    name: 'User',
-    icon: <UserCircleIcon className='h-6 w-6' />,
   },
 ];
 
@@ -51,4 +41,4 @@ const NavBar: React.FC = () => {
   );
 };
 
-export default NavBar;
+export default React.memo(NavBar);
