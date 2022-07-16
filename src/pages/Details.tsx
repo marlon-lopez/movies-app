@@ -54,22 +54,7 @@ const Details: React.FC = () => {
         {/* Recomendations */}
         <ListContainer title='Recomendations' key='recomendations'>
           {selected.recomendations.map((recomendedItem) => (
-            <CardItem
-              img={recomendedItem.poster_path}
-              key={recomendedItem.id}
-              date={
-                'first_air_date' in recomendedItem
-                  ? recomendedItem.first_air_date
-                  : recomendedItem.release_date
-              }
-              title={
-                'name' in recomendedItem
-                  ? recomendedItem.name
-                  : recomendedItem.title
-              }
-              id={recomendedItem.id}
-              type={'name' in recomendedItem ? 'tv' : 'movie'}
-            />
+            <CardItem data={recomendedItem} key={recomendedItem.id} />
           ))}
         </ListContainer>
       </div>

@@ -33,14 +33,7 @@ const DiscoverMovies: React.FC<Props> = ({ title, category }) => {
     return (
       <ListContainer title={title} search={category}>
         {data.map((movie) => (
-          <CardItem
-            img={movie.poster_path}
-            key={movie.id}
-            date={movie.release_date}
-            title={movie.title}
-            id={movie.id}
-            type={'movie'}
-          />
+          <CardItem data={movie} key={movie.id} />
         ))}
       </ListContainer>
     );
