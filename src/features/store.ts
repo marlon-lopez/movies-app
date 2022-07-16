@@ -3,14 +3,17 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import movieSlice from './moviesSlice';
 import tvShowsSlice from './tvShowsSlice';
 import detailsSlice from './detailsSlice';
+import searchSlice from './searchSlice';
+import discoverSlice from './discoverSlice';
 
 const store = configureStore({
   reducer: {
     movies: movieSlice,
     tvShows: tvShowsSlice,
+    discover: discoverSlice,
     details: detailsSlice,
+    search: searchSlice,
   },
-  // middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
