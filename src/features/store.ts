@@ -5,6 +5,7 @@ import tvShowsSlice from './tvShowsSlice';
 import detailsSlice from './detailsSlice';
 import searchSlice from './searchSlice';
 import discoverSlice from './discoverSlice';
+import favoritesSlice from './favoritesSlice';
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     discover: discoverSlice,
     details: detailsSlice,
     search: searchSlice,
+    favorites: favoritesSlice,
   },
 });
 export type AppDispatch = typeof store.dispatch;
