@@ -4,9 +4,8 @@ import {
   Category,
   Movie,
   MoviesCategoryKey,
-  GenreId,
 } from '../utils/types/index';
-import { fetchMoviesByCategory, getGenres } from '../utils/API';
+import { fetchMoviesByCategory } from '../utils/API';
 
 export interface MoviesSliceState {
   popular: Category<Movie>;
@@ -14,7 +13,6 @@ export interface MoviesSliceState {
   top_rated: Category<Movie>;
   now_playing: Category<Movie>;
   latest: Category<Movie>;
-  genres: GenreId[];
 }
 
 export const InitialCategoryState: Category<Movie> = {
@@ -31,14 +29,12 @@ const initialState: MoviesSliceState = {
   top_rated: InitialCategoryState,
   now_playing: InitialCategoryState,
   latest: InitialCategoryState,
-  genres: [],
 };
 
 type payload = {
   category: MoviesCategoryKey;
 } & MoviesQueryResponse;
 
-const sliceName = 'movies';
 export const fetchMovies = createAsyncThunk(
   `movies/fetchMovies`,
   async (
@@ -52,15 +48,6 @@ export const fetchMovies = createAsyncThunk(
     } catch (error) {
       return thunkApi.rejectWithValue('Request has been rejected');
     }
-  },
-);
-export const fetchMovieGenres = createAsyncThunk(
-  'movies/fetchGenreList',
-  async (thunkApi) => {
-    try {
-      const response = await getGenres('movie');
-      return response.genres;
-    } catch (error) {}
   },
 );
 
@@ -86,14 +73,8 @@ const moviesSlice = createSlice({
       )
       .addCase(fetchMovies.rejected, (state, action) => {
         state[action.meta.arg.category].loading = 'failed';
-      })
-      .addCase(fetchMovieGenres.pending, (state, actio) => {})
-      .addCase(fetchMovieGenres.fulfilled, (state, action) => {
-        state.genres = action.payload;
       });
   },
 });
-
-export const {} = moviesSlice.actions;
 
 export default moviesSlice.reducer;
