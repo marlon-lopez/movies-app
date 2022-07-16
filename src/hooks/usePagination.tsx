@@ -7,60 +7,58 @@ const usePagination = <
   K3 extends keyof RootState[K1][K2],
 >(
   entry: K1,
-  data: K2,
+  category?: K2,
   shownPageNumber: number = 7,
 ) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const resultState = useAppSelector((state) => {
+    if (category) {
+      return state[entry][category]['totalPages' as K3];
+    } else return state[entry as 'search' | 'discover'].totalPages;
+  });
 
-  const resultState = useAppSelector((state) => state[entry][data]);
-  const str = 'totalPages' as K3;
-  let totalPages =
-    typeof resultState[str] === 'number' ? Number(resultState[str]) : 0;
-
+  //let totalPages = typeof resultState[str] === 'number' ? Number(resultState[str]) : 0;
+  let totalPages = Number(resultState);
   totalPages = totalPages >= 500 ? 500 : totalPages;
   let pageNumbers: (number | string)[] = [];
 
   //pageNumbers equal to the total pages
   if (totalPages <= shownPageNumber) {
     pageNumbers.push(
-      ...Array.from({ length: shownPageNumber }, (val, index) => index + 1),
+      ...Array.from({ length: totalPages }, (val, index) => index + 1),
     );
   } else {
-    if (totalPages <= shownPageNumber) {
-      pageNumbers.push(...Array.from({ length: totalPages }, (_, i) => i + 1));
-    } else {
-      let startNumber = currentPage - Math.floor(shownPageNumber / 2) + 1;
-      if (totalPages - Math.floor(shownPageNumber / 2) <= currentPage) {
-        startNumber = totalPages - shownPageNumber + 1;
-      }
-
-      if (currentPage - Math.floor(shownPageNumber / 2) > 1) {
-        pageNumbers.push(1);
-        pageNumbers.push('...');
-        if (totalPages - startNumber < 4) {
-        }
-        //once the current page approach the orevious 3 numbers to the last page it shows the last 4 pages else shows 3 and the dots
-        pageNumbers.push(
-          ...Array.from(
-            {
-              length:
-                totalPages - currentPage < 3
-                  ? shownPageNumber - 1
-                  : shownPageNumber - 2,
-            },
-            () => startNumber++,
-          ),
-        );
-      } else {
-        pageNumbers.push(
-          ...Array.from({ length: shownPageNumber }, (_, i) => i + 1),
-        );
-      }
-      if (totalPages - currentPage > Math.floor(shownPageNumber / 2)) {
-        pageNumbers.push('...');
-      }
-      pageNumbers.push(totalPages);
+    let startNumber = currentPage - Math.floor(shownPageNumber / 2) + 1;
+    if (totalPages - Math.floor(shownPageNumber / 2) <= currentPage) {
+      startNumber = totalPages - shownPageNumber + 1;
     }
+
+    if (currentPage - Math.floor(shownPageNumber / 2) > 1) {
+      pageNumbers.push(1);
+      pageNumbers.push('...');
+      if (totalPages - startNumber < 4) {
+      }
+      //once the current page approach the orevious 3 numbers to the last page it shows the last 4 pages else shows 3 and the dots
+      pageNumbers.push(
+        ...Array.from(
+          {
+            length:
+              totalPages - currentPage < 3
+                ? shownPageNumber - 1
+                : shownPageNumber - 2,
+          },
+          () => startNumber++,
+        ),
+      );
+    } else {
+      pageNumbers.push(
+        ...Array.from({ length: shownPageNumber }, (_, i) => i + 1),
+      );
+    }
+    if (totalPages - currentPage > Math.floor(shownPageNumber / 2)) {
+      pageNumbers.push('...');
+    }
+    pageNumbers.push(totalPages);
   }
 
   const goTo = (page: number) => {
