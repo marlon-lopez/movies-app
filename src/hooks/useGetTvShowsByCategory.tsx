@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../features/store';
-import { fetchTvShows, fetchTvShowsGenres } from '../features/tvShowsSlice';
+import { fetchTvShows } from '../features/tvShowsSlice';
 import { TvShowsCategoryKey } from '../utils/types';
 
 const useGetTvShowsByCategory = (
@@ -8,17 +8,13 @@ const useGetTvShowsByCategory = (
   page: number,
 ) => {
   const dispatch = useAppDispatch();
-  const { genres } = useAppSelector((state) => state.tvShows);
+  let { genres } = useAppSelector((state) => state.tvShows);
+  const tvGenres = useAppSelector((state) => state.discover.genres.tv);
+  genres = [...genres, ...tvGenres];
   const { listByPage, loading, totalPages } = useAppSelector(
     (state) => state.tvShows[category],
   );
 
-  useEffect(() => {
-    if (genres.length === 0) {
-      dispatch(fetchTvShowsGenres());
-    }
-    return;
-  }, []);
   useEffect(() => {
     if (!listByPage[page]) {
       dispatch(fetchTvShows({ category, page }));
