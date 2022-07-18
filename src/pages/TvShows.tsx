@@ -7,6 +7,7 @@ import { tvShowsCategoriesMap } from '../utils/CategoryMaps';
 import GenreCards from '../components/GenreCards';
 import Cards from '../components/Cards';
 import CardsSkeleton from '../components/CardsSkeleton';
+import Error from '../components/Error';
 
 const TvShows: React.FC = () => {
   const { pathname } = useLocation();
@@ -17,7 +18,6 @@ const TvShows: React.FC = () => {
     useGetTvShowsByCategory(category, page.currentPage);
 
   if (isLoading) return <CardsSkeleton />;
-  if (isError) return <h1>An error ocurred</h1>;
   if (isSuccess) {
     return (
       <div className='flex flex-col px-0 md:px-4'>
@@ -26,6 +26,9 @@ const TvShows: React.FC = () => {
         <Pagination page={page} />
       </div>
     );
+  }
+  if (isError) {
+    return <Error />;
   }
   return null;
 };

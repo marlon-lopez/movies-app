@@ -9,6 +9,8 @@ import ProducerCard from '../components/ProducerCard';
 import CardItem from '../components/CardItem';
 import Overview from '../components/Overview';
 import Trailers from '../components/Trailers';
+import Error from '../components/Error';
+import DetailsSkeleton from '../components/DetailsSkeleton';
 
 const Details: React.FC = () => {
   const { pathname } = useLocation();
@@ -22,7 +24,12 @@ const Details: React.FC = () => {
     }
     dispatch(fetchDetails({ entry: type, id: Number(id) }));
   }, [id]);
-  if ('poster_path' in selected) {
+
+  if (loading === 'pending') {
+    return <DetailsSkeleton />;
+  }
+
+  if (loading === 'succeeded' && 'poster_path' in selected) {
     return (
       <div className='mb-10 relative'>
         <Overview
@@ -59,6 +66,9 @@ const Details: React.FC = () => {
         </ListContainer>
       </div>
     );
+  }
+  if (loading === 'failed') {
+    <Error />;
   }
   return null;
 };

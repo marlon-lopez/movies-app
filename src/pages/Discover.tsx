@@ -7,6 +7,7 @@ import Cards from '../components/Cards';
 import useGetDataByGenre from '../hooks/useGetDataByGenre';
 import NotResults from '../components/NotResults';
 import CardsSkeleton from '../components/CardsSkeleton';
+import Error from '../components/Error';
 
 const Discover: React.FC = () => {
   const { pathname } = useLocation();
@@ -38,6 +39,9 @@ const Discover: React.FC = () => {
         )}
       </div>
     );
+  }
+  if (isError) {
+    return <Error />;
   }
   return null;
 };

@@ -8,15 +8,14 @@ import { moviesCategoriesMap } from '../utils/CategoryMaps';
 import GenreCards from '../components/GenreCards';
 import Cards from '../components/Cards';
 import CardsSkeleton from '../components/CardsSkeleton';
+import Error from '../components/Error';
 const Movies: React.FC = () => {
   const { pathname } = useLocation();
   //get popular category in case thre is no category in parameters
   const category = moviesCategoriesMap.get(pathname.split('/')[3]) || 'popular';
   const { page } = usePagination('movies', category, 5);
-  const { data, isSuccess, isLoading, genres } = useGetMoviesByCategory(
-    category,
-    page.currentPage,
-  );
+  const { data, isSuccess, isLoading, isError, genres } =
+    useGetMoviesByCategory(category, page.currentPage);
   if (isLoading) return <CardsSkeleton />;
 
   if (isSuccess)
@@ -27,7 +26,9 @@ const Movies: React.FC = () => {
         <Pagination page={page} />
       </div>
     );
-
+  if (isError) {
+    return <Error />;
+  }
   return null;
 };
 

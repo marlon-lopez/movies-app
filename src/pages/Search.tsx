@@ -2,12 +2,13 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Cards from '../components/Cards';
 import CardsSkeleton from '../components/CardsSkeleton';
+import Error from '../components/Error';
 import NotResults from '../components/NotResults';
 import Pagination from '../components/Pagination';
 import useGetQuery from '../hooks/useGetQuery';
 import usePagination from '../hooks/usePagination';
 
-const Search = () => {
+const Search: React.FC = () => {
   const query = useLocation().pathname.split('/')[2];
   const { page } = usePagination('search', undefined, 5);
   const { data, isSuccess, isError, isLoading, totalResults } = useGetQuery({
@@ -29,6 +30,9 @@ const Search = () => {
         )}
       </div>
     );
+  }
+  if (isError) {
+    return <Error />;
   }
   return null;
 };
