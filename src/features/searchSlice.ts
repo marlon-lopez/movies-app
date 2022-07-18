@@ -52,7 +52,6 @@ const searchSlice = createSlice({
   initialState,
   reducers: {
     resetState(state) {
-      console.log('reset state');
       state.loading = 'idle';
       state.results = {};
       state.page = 0;

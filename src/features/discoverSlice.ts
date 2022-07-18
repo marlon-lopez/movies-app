@@ -44,8 +44,7 @@ export const fetchGenres = createAsyncThunk(
         getGenres('movie'),
         getGenres('tv'),
       ]);
-      console.log('movies:', movie);
-      console.log('tv:', tv);
+
       return { tv: tv.genres, movie: movie.genres };
     } catch (error) {
       return thunkApi.rejectWithValue('Request has been rejected');

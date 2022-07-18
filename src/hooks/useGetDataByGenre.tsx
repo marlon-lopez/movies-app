@@ -25,11 +25,9 @@ const useGetDataByGenre = ({ type, id, page }: Props) => {
     if (!genres.movie.length) dispatch(fetchGenres());
 
     if (!results[page.currentPage]) {
-      console.log('no existe esa data, fetching');
       dispatch(fetchDataByGenre({ type, genreId: id, page: page.currentPage }));
     }
     if (genreId && id !== genreId) {
-      console.log('id es diferente, fetching');
       page.goTo(1);
       dispatch(fetchDataByGenre({ type, genreId: id, page: 1 }));
     }

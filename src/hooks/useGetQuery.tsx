@@ -30,7 +30,6 @@ const useGetQuery = ({ searchQuery, page }: Props) => {
       dispatch(fetchQuery({ query: searchQuery, page: 1 }));
     }
     if (!results[page.currentPage]) {
-      console.log('fetching');
       dispatch(fetchQuery({ query: searchQuery, page: page.currentPage }));
     }
   }, [page.currentPage, dispatch, searchQuery, resetState]);

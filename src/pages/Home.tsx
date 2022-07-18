@@ -4,9 +4,6 @@ import Banner from '../components/Banner';
 import DiscoverMovies from '../components/DiscoverMovies';
 
 const Home: React.FC = () => {
-  useEffect(() => {
-    console.log('rendering homepage');
-  });
   return (
     <section className='w-full flex flex-col bg-primary-blue  overflow-hidden px-2 pb-10 '>
       <Banner category='upcoming' />

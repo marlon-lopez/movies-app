@@ -10,7 +10,6 @@ interface Props {
   category: MoviesCategoryKey;
 }
 const DiscoverMovies: React.FC<Props> = ({ title, category }) => {
-  console.log('discover rendering');
   const { data, isLoading, isSuccess } = useGetMoviesByCategory(
     category,
 

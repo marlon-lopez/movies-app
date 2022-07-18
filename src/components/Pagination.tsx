@@ -12,7 +12,6 @@ interface Props {
 }
 
 const Pagination: React.FC<Props> = ({ page }) => {
-  console.log('rendering pagination');
   return (
     <div className='mx-auto pb-6 mb-14'>
       <div className='flex gap-x-5'>

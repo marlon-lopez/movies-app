@@ -62,7 +62,6 @@ const detailsSlice = createSlice({
       })
       .addCase(fetchDetails.rejected, (state, action) => {
         state.loading = 'failed';
-        console.log(action);
         //state.error = action.payload;
       });
   },

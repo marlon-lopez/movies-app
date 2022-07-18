@@ -7,7 +7,6 @@ import BanerSkeletonCard from './BanerSkeletonCard';
 
 const Banner: React.FC<{ category: MoviesCategoryKey }> = ({ category }) => {
   const { data, isLoading, isSuccess } = useGetMoviesByCategory(category, 1);
-  console.log('banner rendered');
   if (isLoading)
     return (
       <ListContainer title='Upcoming movies'>

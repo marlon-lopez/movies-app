@@ -12,7 +12,6 @@ import Error from '../components/Error';
 const Discover: React.FC = () => {
   const { pathname } = useLocation();
   const [_, type, category, genreId] = pathname.split('/');
-  console.log('rendering discover page');
   const { page } = usePagination('discover');
   const { data, isSuccess, isLoading, isError, totalResults, returnGenre } =
     useGetDataByGenre({
