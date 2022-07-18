@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Cards from '../components/Cards';
+import CardsSkeleton from '../components/CardsSkeleton';
 import NotResults from '../components/NotResults';
 import Pagination from '../components/Pagination';
 import useGetQuery from '../hooks/useGetQuery';
@@ -13,7 +14,7 @@ const Search = () => {
     searchQuery: query,
     page,
   });
-  if (isLoading) return <h1>Loading....</h1>;
+  if (isLoading) return <CardsSkeleton />;
   if (isSuccess) {
     return (
       <div className='flex flex-col px-0 md:px-4'>

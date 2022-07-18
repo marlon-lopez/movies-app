@@ -62,6 +62,9 @@ const searchSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchQuery.pending, (state) => {
+        state.loading = 'pending';
+      })
       .addCase(
         fetchQuery.fulfilled,
         (state, action: PayloadAction<QueryResponse>) => {

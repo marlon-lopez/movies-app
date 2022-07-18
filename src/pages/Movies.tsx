@@ -7,6 +7,7 @@ import usePagination from '../hooks/usePagination';
 import { moviesCategoriesMap } from '../utils/CategoryMaps';
 import GenreCards from '../components/GenreCards';
 import Cards from '../components/Cards';
+import CardsSkeleton from '../components/CardsSkeleton';
 const Movies: React.FC = () => {
   const { pathname } = useLocation();
   //get popular category in case thre is no category in parameters
@@ -16,10 +17,7 @@ const Movies: React.FC = () => {
     category,
     page.currentPage,
   );
-  if (isLoading)
-    return (
-      <h1 className='text-white font-medium text-base '>Cargando........</h1>
-    );
+  if (isLoading) return <CardsSkeleton />;
 
   if (isSuccess)
     return (
@@ -29,6 +27,7 @@ const Movies: React.FC = () => {
         <Pagination page={page} />
       </div>
     );
+
   return null;
 };
 

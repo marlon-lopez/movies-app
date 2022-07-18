@@ -6,6 +6,7 @@ import GenreCards from '../components/GenreCards';
 import Cards from '../components/Cards';
 import useGetDataByGenre from '../hooks/useGetDataByGenre';
 import NotResults from '../components/NotResults';
+import CardsSkeleton from '../components/CardsSkeleton';
 
 const Discover: React.FC = () => {
   const { pathname } = useLocation();
@@ -19,9 +20,7 @@ const Discover: React.FC = () => {
       page,
     });
   if (isLoading) {
-    return (
-      <h1 className='text-white font-medium text-base '>Cargando........</h1>
-    );
+    return <CardsSkeleton />;
   }
   if (isSuccess) {
     return (

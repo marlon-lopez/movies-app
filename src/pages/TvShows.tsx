@@ -6,6 +6,7 @@ import usePagination from '../hooks/usePagination';
 import { tvShowsCategoriesMap } from '../utils/CategoryMaps';
 import GenreCards from '../components/GenreCards';
 import Cards from '../components/Cards';
+import CardsSkeleton from '../components/CardsSkeleton';
 
 const TvShows: React.FC = () => {
   const { pathname } = useLocation();
@@ -15,7 +16,7 @@ const TvShows: React.FC = () => {
   const { data, isError, isLoading, isSuccess, genres } =
     useGetTvShowsByCategory(category, page.currentPage);
 
-  if (isLoading) return <h1>Loading ........</h1>;
+  if (isLoading) return <CardsSkeleton />;
   if (isError) return <h1>An error ocurred</h1>;
   if (isSuccess) {
     return (
