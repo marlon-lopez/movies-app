@@ -16,7 +16,7 @@ const ListContainer: React.FC<Props> = ({ title, children, search }) => {
         {search && (
           <Link
             to={{
-              pathname: `movies/category/${search}`,
+              pathname: `movie/category/${search}`,
             }}
             className='text-white font-semibold mb-4 mx-2 '>
             <div className='flex items-center text-blue-400 '>

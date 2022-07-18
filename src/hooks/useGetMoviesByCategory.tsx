@@ -5,7 +5,9 @@ import { MoviesCategoryKey } from '../utils/types';
 
 const useGetListByCategory = (category: MoviesCategoryKey, page: number) => {
   const dispatch = useAppDispatch();
-  const genres = useAppSelector((state) => state.discover.genres.movie);
+  let { genres } = useAppSelector((state) => state.movies);
+  const movieGenres = useAppSelector((state) => state.discover.genres.movie);
+  genres = [...genres, ...movieGenres];
   const { listByPage, totalPages, loading } = useAppSelector(
     (state) => state.movies[category],
   );

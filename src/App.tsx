@@ -26,8 +26,8 @@ const App: React.FC = () => {
           <SearchBar />
           <Route path='/' exact component={Home} />
           <Route path='/movie/:id' exact component={Details} />
+          <Route path='/movie/category/:category' component={Movies} exact />
           <Route path='/movie' component={Movies} exact />
-          <Route path='/movies/category/:category' component={Movies} exact />
           <Route path='/tv' component={TvShows} exact />
           <Route path='/tv/:id' component={Details} exact />
           <Route path='/tv/category/:category' component={TvShows} exact />

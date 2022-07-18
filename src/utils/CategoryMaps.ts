@@ -4,7 +4,6 @@ const moviesCategoriesMap: Map<string, MoviesCategoryKey> = new Map();
 moviesCategoriesMap.set('popular', 'popular');
 moviesCategoriesMap.set('upcoming', 'upcoming');
 moviesCategoriesMap.set('popular', 'popular');
-moviesCategoriesMap.set('latest', 'latest');
 moviesCategoriesMap.set('now_playing', 'now_playing');
 moviesCategoriesMap.set('top_rated', 'top_rated');
 

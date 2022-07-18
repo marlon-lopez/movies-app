@@ -4,6 +4,7 @@ import {
   Category,
   Movie,
   MoviesCategoryKey,
+  GenreId,
 } from '../utils/types/index';
 import { fetchMoviesByCategory } from '../utils/API';
 
@@ -12,7 +13,7 @@ export interface MoviesSliceState {
   upcoming: Category<Movie>;
   top_rated: Category<Movie>;
   now_playing: Category<Movie>;
-  latest: Category<Movie>;
+  genres: GenreId[];
 }
 
 export const InitialCategoryState: Category<Movie> = {
@@ -28,7 +29,12 @@ const initialState: MoviesSliceState = {
   upcoming: InitialCategoryState,
   top_rated: InitialCategoryState,
   now_playing: InitialCategoryState,
-  latest: InitialCategoryState,
+  genres: [
+    { id: 123456, name: 'popular', category: true },
+    { id: 2234536, name: 'upcoming', category: true },
+    { id: 342456, name: 'top_rated', category: true },
+    { id: 34243456, name: 'now_playing', category: true },
+  ],
 };
 
 type payload = {
@@ -44,6 +50,9 @@ export const fetchMovies = createAsyncThunk(
     if (page < 0) page = 1;
     try {
       const response = await fetchMoviesByCategory(category, page);
+      if (response.total_results < 1) {
+        return thunkApi.rejectWithValue('No results found');
+      }
       return { category, page, ...response };
     } catch (error) {
       return thunkApi.rejectWithValue('Request has been rejected');
