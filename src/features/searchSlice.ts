@@ -7,6 +7,7 @@ interface InitialSearchState {
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
   page: number;
   totalPages: number;
+  totalResults: number;
   error: null | string;
   query: string;
 }
@@ -16,6 +17,7 @@ const initialState: InitialSearchState = {
   error: null,
   page: 0,
   totalPages: 0,
+  totalResults: 0,
   query: '',
 };
 
@@ -33,7 +35,6 @@ export const fetchQuery = createAsyncThunk(
   ) => {
     try {
       const response = await getQuery(query, page);
-      //  return { response, query };
       return { ...response, query };
     } catch (error) {}
   },
@@ -68,6 +69,7 @@ const searchSlice = createSlice({
           state.results[action.payload.page] = action.payload.results;
           state.page = action.payload.page;
           state.totalPages = action.payload.total_pages;
+          state.totalResults = action.payload.total_results;
           state.loading = 'succeeded';
         },
       )

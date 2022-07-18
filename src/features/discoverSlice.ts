@@ -11,6 +11,7 @@ interface InitialDiscoveryState {
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
   page: number;
   totalPages: number;
+  totalResults: number;
   error: null | string;
   genreId: number;
   genres: GenresPayload;
@@ -22,6 +23,7 @@ const initialState: InitialDiscoveryState = {
   error: null,
   page: 0,
   totalPages: 0,
+  totalResults: 0,
   genreId: 0,
   genres: { tv: [], movie: [] },
 };
@@ -92,11 +94,13 @@ const discoverySlice = createSlice({
       .addCase(
         fetchDataByGenre.fulfilled,
         (state, action: PayloadAction<ParsedResponse>) => {
-          const { genreId, page, results, total_pages } = action.payload;
+          const { genreId, page, results, total_pages, total_results } =
+            action.payload;
           state.results[page] = results;
           state.genreId = genreId;
           state.page = page;
           state.totalPages = total_pages;
+          state.totalResults = total_results;
           state.loading = 'succeeded';
         },
       )

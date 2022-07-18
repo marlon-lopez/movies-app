@@ -19,9 +19,8 @@ interface Props {
 const useGetDataByGenre = ({ type, id, page }: Props) => {
   const dispatch = useAppDispatch();
 
-  const { results, loading, totalPages, genreId, genres } = useAppSelector(
-    (state) => state.discover,
-  );
+  const { results, loading, totalPages, genreId, genres, totalResults } =
+    useAppSelector((state) => state.discover);
   useEffect(() => {
     if (!genres.movie.length) dispatch(fetchGenres());
 
@@ -41,7 +40,15 @@ const useGetDataByGenre = ({ type, id, page }: Props) => {
   const isError = loading === 'failed';
   const isSuccess = results[page.currentPage] !== undefined ? true : false;
   const returnGenre = type !== 'tv' ? genres.tv : genres.movie;
-  return { data, totalPages, isLoading, isError, isSuccess, returnGenre };
+  return {
+    data,
+    totalPages,
+    totalResults,
+    isLoading,
+    isError,
+    isSuccess,
+    returnGenre,
+  };
 };
 
 export default useGetDataByGenre;

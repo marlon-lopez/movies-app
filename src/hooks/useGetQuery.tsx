@@ -17,7 +17,9 @@ interface Props {
 
 const useGetQuery = ({ searchQuery, page }: Props) => {
   const dispatch = useAppDispatch();
-  const { results, loading, query } = useAppSelector((state) => state.search);
+  const { results, loading, query, totalResults } = useAppSelector(
+    (state) => state.search,
+  );
 
   useEffect(() => {
     if (!query) {
@@ -36,7 +38,7 @@ const useGetQuery = ({ searchQuery, page }: Props) => {
   const isLoading = loading === 'pending';
   const isError = loading === 'failed';
   const isSuccess = results[page.currentPage] !== undefined ? true : false;
-  return { data, isLoading, isError, isSuccess };
+  return { data, isLoading, isError, isSuccess, totalResults };
 };
 
 export default useGetQuery;
